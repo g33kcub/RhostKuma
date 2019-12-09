@@ -49,3 +49,5 @@
 &step.exit.alias #10=[setq(al,[ucstr([extract(fullname(%0),2,1,;)])])][ansi([switch(1,hasflag(%0,dark),+mediumslateblue,hastoggle(%0,variable),+sienna,+white)],[if(elock2(%0,%q<t1>),%q<al>,--)])]
 
 &f.elock2 #8=[elock(%0,%1)]
+
+&json.exits #10=[setq(t1,%#)][setq(je,[sortby(sort.ename,[filter(fil.cansee,lexits(%L))])])][iter(%q<je>,[name(##)]~[if([hasflag(##,build)],BUILD,PATH)],%B,|)]

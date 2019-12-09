@@ -5,6 +5,9 @@
 &CONFIG.GRP #9=global_parent_room [after([root(grp)],#)]
 &CONFIG.GEP #9=global_parent_exit [after([root(gep)],#)]
 &CONFIG.GPP #9=global_parent_player [after([root(gpp)],#)]
+&CONFIG.GRP.format #9=room_attr_default [after([root(afr)],#)]
+&CONFIG.GEP.format #9=exit_attr_default [after([root(gep)],#)]
+&CONFIG.GPP.format #9=player_attr_default [after([root(gpp)],#)]
 &CONFIG.NPC.NAME #9=flag_name NPC MARKER0
 &CONFIG.NPC.SEE #9=flag_access_see NPC mortal
 &CONFIG.NPC.SET #9=flag_access_set NPC guildmaster
