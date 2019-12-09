@@ -1,0 +1,24 @@
+@@ This is for the admin object.
+@@ #9
+
+@Startup #9=@dolist [lattr(me/_line*)]={&## [root(rao)]};@wait 1={@dolist [lattr(me/config.*)]=&_Line[dec(#@)] [root(rao)]=[u([root(rao)]/##)]};@wait 2={@admin/save;@admin/execute}
+&CONFIG.GRP #9=global_parent_room [after([root(grp)],#)]
+&CONFIG.GEP #9=global_parent_exit [after([root(gep)],#)]
+&CONFIG.GPP #9=global_parent_player [after([root(gpp)],#)]
+&CONFIG.NPC.NAME #9=flag_name NPC MARKER0
+&CONFIG.NPC.SEE #9=flag_access_see NPC mortal
+&CONFIG.NPC.SET #9=flag_access_set NPC guildmaster
+&CONFIG.NPC.UNSET #9=flag_access_unset NPC guildmaster
+&CONFIG.BUILD.NAME #9=flag_name BUILD MARKER1
+&CONFIG.BUILD.SEE #9=flag_access_see BUILD mortal
+&CONFIG.BUILD.SET #9=flag_access_set BUILD guildmaster
+&CONFIG.BUILD.UNSET #9=flag_access_unset BUILD guildmaster
+&CONFIG.MONSTER.NAME #9=flag_name MONSTER MARKER2
+&CONFIG.MONSTER.SEE #9=flag_access_see MONSTER mortal
+&CONFIG.MONSTER.SET #9=flag_access_set MONSTER guildmaster
+&CONFIG.MONSTER.UNSET #9=flag_access_unset MONSTER guildmaster
+
+&CONFIG.JSON.NAME #9=flag_name JSON MARKER3
+&CONFIG.JSON.SEE #9=flag_access_see JSON mortal
+&CONFIG.JSON.SET #9=flag_access_set JSON immortal
+&CONFIG.JSON.UNSET #9=flag_access_unset JSON immortal

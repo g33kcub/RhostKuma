@@ -1,0 +1,51 @@
+@@ #10
+@NameFormat #10=[u(nameformat[controls(%#,[num(Me)])])]
+&NAMEFORMAT1 #10=[line(left,53,[cname(me)])][line(right,25,[num(me)][flags([num(me)])])]
+&NAMEFORMAT0 #10=[line(left,[name(me)])]
+
+&nameformat.zone #10=[rjc([ansi(hw,House)]: [mapdb(get_house,%0)],39)]%R[ljc([ansi(hw,Domain)]: [mapdb(get_domain,%0)],30)][rjc([u(nameformat.time,%0)],48)]
+&nameformat.time #10=[ictime(season.time of day.prettytime,%0)]
+
+@rsrvdesc2 #10=[if([mapdb(is_outdoors,[num(me)])],[weather(long-desc,[num(me)])])]
+
+@conformat #10=[u(conformat.extras,[num(me)])][line(center)][setq(players,[u(.get_players,%#,%L)])][setq(objects,[u(.get_objects,%#,%L)])][setq(npc,[u(.get_npcs,%#,%L)])][if(setr(hascon,gte(words(%q<players> %q<npc> %q<objects>),1)),%R)][if(gte(words(%q<players>),1),[line(subleft,Players)]%R[iter(sortby(sort.name,%q<players>),[u(fmt.player,##,%#)],%B,%R)])][if(cand(gte(words(%q<npc>),1),gte(words(%q<players>),1)),%R)][if(gte(words(%q<npc>),1),[line(subleft,NPCs)]%R[iter(sortby(sort.name,%q<npc>),[u(fmt.npc,##,%#)],%B,%R)])][if(cand(gte(words(%q<objects>),1),gte(words(%q<players> %q<npc>),1)),%R)][if(gte(words(%q<objects>),1),[line(subleft,Objects)][step(step.object,sortby(sort.name,%q<objects>),2,%B,)])]
+
+&step.object #10=%R[printf($-38s %B$-38s,[u(step.object.fmt,%0)],[u(step.object.fmt,%1)])]
+&step.object.fmt #10=[if(gte(words(%0),1),[ljc([cname(%0)],30)]%B[rjc([if(controls(%#,%0),%0)],7)])]
+
+&conformat.extras #10=[if([setr(has,[cor([hasattr(%0,places)],[gte(words(lattr(%0/view.*)),1)])])],[line(subcenter)]%R)][iter([if([hasattr(%0,places)],places)] [if([gte(words(lattr(%0/view.*)),1)],views)],[u(.msg.##)],%B,%R)][if(%q<has>,%R)]
+
+&.msg.views #10=There are [ansi(hc,Views)] present.
+&.msg.places #10=There are [ansi(hc,Places)] present.
+
+&.get_players #10=[sort([iter([keeptype(lcon(%1),player)],if(cansee2(%0,##),##))])]
+&.get_objects #10=[sort([iter(filter(fil.not_npc,[keeptype(lcon(%1),thing)]),if(cansee2(%0,##),##))])]
+&.get_npcs #10=[sort([iter(filter(fil.npc,[keeptype(lcon(%1),thing)]),if(cansee2(%0,##),##))])]
+
+
+&fil.not_npc #10=[not([hasflag(%0,NPC)])]
+&fil.npc #10=[hASflag(%0,NPC)]
+
+&fil.cansee #8=[cansee2(%q<T1>,%0)]
+
+&fmt.player #10=[printf($-28s $-45s $3s,[if([isstaff(%0)],[ansi(#ffd700,*)],)][tname(%0)],[shortdesc(%0)],[hideidle(%0)])]
+&sort.name #8=[comp(name(%0),name(%1))]
+
+&fmt.npc #10=[printf($-28s $-51s,[tname(%0)],[shortdesc(%0)])]
+
+@exitformat #10=[setq(t1,%#)][setq(build,[filter(fil.build,lexits(%L))])][setq(path,[filter(fil.path,lexits(%L))])][u(exitformat.build,%q<build>)][if(cand(gte(words(%q<path>),1),gte(words(%q<build>),1)),%R)][u(exitformat.path,%q<path>)][if(gte(words(%q<build> %q<path>),1),%R)][line()]
+
+&fil.build #8=[cand([cansee2(%q<t1>,%0)],[hasflag(%0,build)])]
+&fil.path #8=[cand([cansee2(%q<t1>,%0)],[not([hasflag(%0,Build)])])]
+
+&exitformat.build #10=[if(gte(words(%0),1),[line(subleft,Buildings & Residences)][step(step.exit,sortby(sort.ename,%0),2,)])]
+&exitformat.path #10=[if(gte(words(%0),1),[line(subleft,Streets & Pathways)][step(step.exit,sortby(sort.ename,%0),2,)])]
+
+&sort.ename #8=[comp(name(%0),name(%1))]
+
+&step.exit #10=%R[printf($-38s %B$-38s,[u(step.exit.fmt,%0)],[u(step.exit.fmt,%1)])]
+
+&step.exit.fmt #10=[if([gte(words(%0),1)],[printf($-5s $-33s,[chr(91)][u(step.exit.alias,%0)][chr(93)],[name(%0)])])]
+&step.exit.alias #10=[setq(al,[ucstr([extract(fullname(%0),2,1,;)])])][ansi([switch(1,hasflag(%0,dark),+mediumslateblue,hastoggle(%0,variable),+sienna,+white)],[if(elock2(%0,%q<t1>),%q<al>,--)])]
+
+&f.elock2 #8=[elock(%0,%1)]
